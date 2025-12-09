@@ -11,6 +11,11 @@ Base.metadata.create_all(bind=engine)
 
 app=FastAPI()
 
+
+@app.get("/")
+def home():
+    return "Application Running Succssefully"
+
 @app.post("/calculate/", response_model=schemas.CalcResponse, status_code=status.HTTP_201_CREATED)
 def calculate(data:schemas.CalcRequest, db: Session = Depends(get_db)):
     # 400 Bad Request
